@@ -36,8 +36,6 @@ C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\staticwebass
 C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.dll
 C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.pdb
 C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.genruntimeconfig.cache
-C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.csproj.CoreCompileInputs.cache
-C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\andre\source\repos\Factura\Factura\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\andre\source\repos\Factura\Factura\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\andre\source\repos\Factura\Factura\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
@@ -61,3 +59,5 @@ C:\Users\andre\source\repos\Factura\Factura\bin\Debug\netcoreapp3.1\runtimes\win
 C:\Users\andre\source\repos\Factura\Factura\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\andre\source\repos\Factura\Factura\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.csprojAssemblyReference.cache
+C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.csproj.CoreCompileInputs.cache
+C:\Users\andre\source\repos\Factura\Factura\obj\Debug\netcoreapp3.1\Factura.MvcApplicationPartsAssemblyInfo.cache

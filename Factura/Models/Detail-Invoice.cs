@@ -7,6 +7,9 @@ namespace Factura.Models
 {
     public class Detail_Invoice
     {
-       
+        public int Id { get; set; }
+        public int Cantidad { get; set; }
+        public decimal Total { get; set; }
+        public decimal Precio_Pro { get; set; }
     }
 }
