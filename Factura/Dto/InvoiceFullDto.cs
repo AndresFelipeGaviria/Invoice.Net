@@ -24,8 +24,8 @@ namespace Factura.Dto
         public int IdClient { get; set; }
         public string NameClient { get; set; }
         public DateTime Date { get; set; }
-        public string ProductName { get; set; }
-        public decimal PriceProduct { get; set; }
+     
+        public List<DetailInvoiceDto> DetailInvoice { get; set; }
 
     }
     

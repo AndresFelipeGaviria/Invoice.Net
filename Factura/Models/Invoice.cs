@@ -15,7 +15,7 @@ namespace Factura.Models
         public string NameShopkeeper { get; set; }
         public List<DetailInvoice> DetailsNavigations { get; set; }
         public Client ClientNavigation { get; set; }
-
+       
     }
     
        

@@ -27,24 +27,49 @@ namespace Factura.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ResponseInvoice>>> GetAllInvoices()
         {
-            var resultInvoices = await _facturaContexto.Invoices.Include("DetailInvoice").Include("Client").ToListAsync();
+            //
+            var resultInvoices = await _facturaContexto.Invoices.Include("DetailsNavigations").Include("DetailsNavigations.Product").Include("DetailsNavigations").Include("ClientNavigation").ToListAsync();
             var response_invoice = new List<ResponseInvoice>();
-
+            
             if (resultInvoices == null)
             {
                 return BadRequest();
             }
-            //foreach(var invoice in resultInvoices )
-            //    {
-            //        var itemInvoce = new ResponseInvoice();
-            //        itemInvoce.InvoiceId = invoice.Id;
-            //        itemInvoce.IdClient = invoice.ClientNavigation.Id;
-            //        itemInvoce.NameClient = invoice.ClientNavigation.Name;
-            //        itemInvoce.ProductName = invoice.DetailsNavigations.Product.Name;
-            //        itemInvoce.PriceProduct = invoice.DetailsNavigations.Precio_Pro;
 
-            //        response_invoice.Add(itemInvoce);
-            //    }
+            foreach (var invoice in resultInvoices)
+            {
+
+
+                var itemInvoce = new ResponseInvoice();
+                itemInvoce.InvoiceId = invoice.Id;
+                itemInvoce.IdClient = invoice.ClientNavigation.Id;
+                itemInvoce.NameClient = invoice.ClientNavigation.Name;
+                itemInvoce.Date = invoice.Date;
+
+                itemInvoce.DetailInvoice = new List<DetailInvoiceDto>();
+                    foreach (var detInvoice in invoice.DetailsNavigations)
+                {
+                    var itemDt = new DetailInvoiceDto();
+
+                    itemDt.Product = new ProductDto {
+                        Id = detInvoice.Product.Id,
+                        Name = detInvoice.Product.Name,
+                        Price = detInvoice.Product.Price
+                    };
+
+                    itemDt.Precio_Pro = detInvoice.Precio_Pro;
+                    itemDt.Id = detInvoice.Id;
+                    itemDt.ProductId = detInvoice.ProductId;
+                    itemInvoce.DetailInvoice.Add(itemDt);
+                    
+                }
+                    
+
+
+
+
+                response_invoice.Add(itemInvoce);
+            }
             return response_invoice;
 
 
