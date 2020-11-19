@@ -134,61 +134,27 @@ namespace Factura.Controllers
             }
 
             return Ok(result);
-            //var resultProduct =  await _facturaContexto.Products.FindAsync(invoiceFullDto.DetailInvoiceDto.Product.Id);
-            //if(resultProduct == null)
-            //{
-            //    return BadRequest();
-            //}
-            //var listProduct = new DetailInvoice();
-            //listProduct.ProductId = resultProduct.Id;
-            //listProduct.Precio_Pro = resultProduct.Price;
-            //listProduct.Cantidad = invoiceFullDto.DetailInvoiceDto.Cantidad;
-            //listProduct.Total = resultProduct.Price * listProduct.Cantidad;
-
-            //_facturaContexto.DetailInvoices.Add(listProduct);
-            //_facturaContexto.SaveChanges();
-
-
-            //var findDetails = _facturaContexto.DetailInvoices.Where(x => )
-
-            //var resultClient = await _facturaContexto.Clients.FindAsync(invoiceFullDto.ClientId);
-            //if(resultClient == null)
-            //{
-            //    var client = new Client();
-            //    client.Id = invoiceFullDto.ClientId;
-            //    client.Name = invoiceFullDto.ClientDto.Name;
-            //    client.Telephone = invoiceFullDto.ClientDto.Telephone;
-            //    client.Address = invoiceFullDto.ClientDto.Address;
-
-            //    _facturaContexto.Clients.Add(client);
-            //    _facturaContexto.SaveChanges();
-            //}
-            //var Invoice = new Invoice();
-            //Invoice.ClientId = resultClient.Id;
-            //Invoice.NameShopkeeper = invoiceFullDto.NameShopkeeper;
-            //Invoice.DetailInvoiceId = invoiceFullDto.DetailInvoiceId;
-
-            //_facturaContexto.Invoices.Add(Invoice);
-            //_facturaContexto.SaveChanges();
-
-
-
-            //var findInvoice = await _facturaContexto.Invoices.Where(x => x.Id == Invoice.Id).FirstOrDefaultAsync();
-
-            //var itemInvoce = new ResponseInvoice();
-            //itemInvoce.InvoiceId = findInvoice.Id;
-            //itemInvoce.IdClient = findInvoice.ClientNavigation.Id;
-            //itemInvoce.NameClient = findInvoice.ClientNavigation.Name;
-            //itemInvoce.ProductName = findInvoice.DetailsNavigations.Product.Name;
-            //itemInvoce.PriceProduct = findInvoice.DetailsNavigations.Precio_Pro;
-
-            //return itemInvoce;
+           
         }
 
         // PUT api/<InvoiceController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<IEnumerable<ResponseInvoice>>> Put(InvoiceFullDto invoiceFullDto )
         {
+            var result = new ResponseInvoice();
+            try
+            {
+                var rs_invoice =await _facturaContexto.Invoices.Where(x => x.Id == invoiceFullDto.Id && x.Date == invoiceFullDto.Date).FirstOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return Ok(result);
+
+
         }
 
         // DELETE api/<InvoiceController>/5

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Factura.Data;
+using Factura.Dto;
 using Factura.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +39,15 @@ namespace Factura.Controllers
             return clientItem;
         }
         [HttpPost]
-        public async Task<ActionResult<Client>> PostClient(Client item)
+        public async Task<ActionResult<ClientDto>> PostClient(ClientDto item)
         {
-            _facturaContexto.Clients.Add(item);
+            var cli = new Client();
+
+            cli.Name = item.Name;
+            cli.Telephone = item.Telephone;
+            cli.Address = item.Address;
+
+            _facturaContexto.Clients.Add(cli);
             await _facturaContexto.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetClient), new { id = item.Id }, item);

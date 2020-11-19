@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andres\\source\\repos\\AndresFelipeGaviria\\Invoice.Net\\Factura\\Factura.csproj": {}
+    "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andres\\source\\repos\\AndresFelipeGaviria\\Invoice.Net\\Factura\\Factura.csproj": {
+    "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andres\\source\\repos\\AndresFelipeGaviria\\Invoice.Net\\Factura\\Factura.csproj",
+        "projectUniqueName": "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj",
         "projectName": "Factura",
-        "projectPath": "C:\\Users\\Andres\\source\\repos\\AndresFelipeGaviria\\Invoice.Net\\Factura\\Factura.csproj",
-        "packagesPath": "C:\\Users\\Andres\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andres\\source\\repos\\AndresFelipeGaviria\\Invoice.Net\\Factura\\obj\\",
+        "projectPath": "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj",
+        "packagesPath": "C:\\Users\\zoit1\\.nuget\\packages\\",
+        "outputPath": "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Andres\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zoit1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.9, )"

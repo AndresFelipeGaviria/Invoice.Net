@@ -30,7 +30,9 @@ namespace Factura
         {
             services.AddSwaggerGen();
             services.AddDbContext<FacturaContexto>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexionText")));
-            
+
+            //services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
         }
 
