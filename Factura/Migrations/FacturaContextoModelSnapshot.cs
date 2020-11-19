@@ -15,16 +15,16 @@ namespace Factura.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Factura.Models.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -37,17 +37,26 @@ namespace Factura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ClientsItems");
+                    b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Factura.Models.Detail_Invoice", b =>
+            modelBuilder.Entity("Factura.Models.DetailInvoice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Precio_Pro")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
@@ -55,7 +64,11 @@ namespace Factura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Detail_InvoiceItems");
+                    b.HasIndex("InvoiceId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("DetailInvoices");
                 });
 
             modelBuilder.Entity("Factura.Models.Invoice", b =>
@@ -63,20 +76,22 @@ namespace Factura.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("NameClient")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameShopkeeper")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("InvoiceItems");
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("Factura.Models.Product", b =>
@@ -84,9 +99,10 @@ namespace Factura.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -94,7 +110,33 @@ namespace Factura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductItems");
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Factura.Models.DetailInvoice", b =>
+                {
+                    b.HasOne("Factura.Models.Invoice", "Invoice")
+                        .WithMany("DetailsNavigations")
+                        .HasForeignKey("InvoiceId")
+                        .HasConstraintName("FKInvoice_DetalInvoice")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Factura.Models.Product", "Product")
+                        .WithMany("DetailInvoice")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FKDetailInvoice_Product")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Factura.Models.Invoice", b =>
+                {
+                    b.HasOne("Factura.Models.Client", "ClientNavigation")
+                        .WithMany("Invoice")
+                        .HasForeignKey("ClientId")
+                        .HasConstraintName("FKInvoice_Client")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

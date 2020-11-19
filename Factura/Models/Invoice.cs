@@ -8,11 +8,14 @@ namespace Factura.Models
 {
     public class Invoice 
     {
+       
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public string NameClient { get; set; }
+        public int ClientId { get; set; }
         public string NameShopkeeper { get; set; }
-       
+        public List<DetailInvoice> DetailsNavigations { get; set; }
+        public Client ClientNavigation { get; set; }
+
     }
     
        

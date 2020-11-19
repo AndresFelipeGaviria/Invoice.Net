@@ -24,12 +24,12 @@ namespace Factura.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Client>>> GetAllClients()
         {
-            return await _facturaContexto.ClientsItems.ToListAsync();
+            return await _facturaContexto.Clients.ToListAsync();
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<Client>> GetClient(int id)
         {
-            var clientItem = await _facturaContexto.ClientsItems.FindAsync(id);
+            var clientItem = await _facturaContexto.Clients.FindAsync(id);
 
             if (clientItem == null)
             {
@@ -40,7 +40,7 @@ namespace Factura.Controllers
         [HttpPost]
         public async Task<ActionResult<Client>> PostClient(Client item)
         {
-            _facturaContexto.ClientsItems.Add(item);
+            _facturaContexto.Clients.Add(item);
             await _facturaContexto.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetClient), new { id = item.Id }, item);
@@ -60,15 +60,17 @@ namespace Factura.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteClient(int id)
         {
-            var clientItem = await _facturaContexto.ClientsItems.FindAsync(id);
+            var clientItem = await _facturaContexto.Clients.FindAsync(id);
             if (clientItem == null)
             {
                 return NotFound();
             }
-            _facturaContexto.ClientsItems.Remove(clientItem);
+            _facturaContexto.Clients.Remove(clientItem);
             await _facturaContexto.SaveChangesAsync();
 
             return NoContent();
         }
+       //[HttpPost]
+       //public async Task<ActionResult> Upser
     }
 }
