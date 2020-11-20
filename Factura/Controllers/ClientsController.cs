@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Factura.Data;
 using Factura.Dto;
 using Factura.Models;
@@ -16,19 +17,24 @@ namespace Factura.Controllers
     public class ClientsController : ControllerBase
     {
         private readonly FacturaContexto _facturaContexto;
+        private readonly IMapper _mapper;
 
-        public ClientsController(FacturaContexto facturaContexto)
+        public ClientsController(FacturaContexto facturaContexto, IMapper mapper )
         {
             _facturaContexto = facturaContexto;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Client>>> GetAllClients()
+        public async Task<ActionResult<IEnumerable<ClientDto>>> GetAllClients()
         {
-            return await _facturaContexto.Clients.ToListAsync();
+            var re_client= await _facturaContexto.Clients.ToListAsync();
+            var mapcli= _mapper.Map<IEnumerable<ClientDto>>(re_client);
+            return Ok(mapcli);
+                
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Client>> GetClient(int id)
+        public async Task<ActionResult<ClientDto>> GetClient(int id)
         {
             var clientItem = await _facturaContexto.Clients.FindAsync(id);
 
@@ -36,7 +42,8 @@ namespace Factura.Controllers
             {
                 return NotFound();
             }
-            return clientItem;
+            var mapcli = _mapper.Map<ClientDto>(clientItem);
+            return mapcli;
         }
         [HttpPost]
         public async Task<ActionResult<ClientDto>> PostClient(ClientDto item)
@@ -53,7 +60,7 @@ namespace Factura.Controllers
             return CreatedAtAction(nameof(GetClient), new { id = item.Id }, item);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult> PutClient(int id, Client item)
+        public async Task<ActionResult> PutClient(int id, ClientDto item)
         {
             if (id != item.Id)
             {

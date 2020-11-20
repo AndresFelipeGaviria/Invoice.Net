@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "+AO0ARogYbjQKLBP58yBOr5uregHRYWmX+LcxLwg8Vbm8HG3kS8IrO9y2QOf8uXfqQS2gHNtikSoXzWd0nJ8eQ==",
+  "dgSpecHash": "xN2WpJQeznDF5oZjcPWLQxWeklbF+CIIbLX+Q6SUsjaJN4gwWrmUi1LkgJTlA+LNWaDsYAGmRIgsScmIABjntw==",
   "success": true,
   "projectFilePath": "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zoit1\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\zoit1\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
     "C:\\Users\\zoit1\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.9\\microsoft.aspnetcore.cryptography.internal.3.1.9.nupkg.sha512",
     "C:\\Users\\zoit1\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.9\\microsoft.aspnetcore.cryptography.keyderivation.3.1.9.nupkg.sha512",
     "C:\\Users\\zoit1\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

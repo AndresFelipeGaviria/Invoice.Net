@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Factura.Data;
+using Factura.Dto;
 using Factura.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,19 +17,24 @@ namespace Factura.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly FacturaContexto _facturaContexto;
+        private readonly IMapper _mapper;
 
-        public ProductsController(FacturaContexto facturaContexto)
+        public ProductsController(FacturaContexto facturaContexto, IMapper mapper)
         {
+            _mapper = mapper;
             _facturaContexto = facturaContexto;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
-            return await _facturaContexto.Products.ToListAsync();
+            var rs_product= await _facturaContexto.Products.ToListAsync();
+            var map_prod = _mapper.Map<IEnumerable<ProductDto>>(rs_product);
+
+            return Ok(map_prod); 
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
             var productItem = await _facturaContexto.Products.FindAsync(id);
 
@@ -35,18 +42,20 @@ namespace Factura.Controllers
             {
                 return NotFound();
             }
-            return productItem;
+            var map_produc = _mapper.Map<ProductDto>(productItem);
+            return Ok(map_produc);
         }
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product item)
+        public async Task<ActionResult<ProductDto>> PostProduct(ProductDto item)
         {
-            _facturaContexto.Products.Add(item);
+            var map_produ = _mapper.Map<Product>(item);
+            _facturaContexto.Products.Add(map_produ);
             await _facturaContexto.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProduct), new { id = item.Id }, item);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult> PutProduct(int id, Product item)
+        public async Task<ActionResult> PutProduct(int id, ProductDto item)
         {
             if(id != item.Id)
             {

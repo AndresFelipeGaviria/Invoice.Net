@@ -30,7 +30,7 @@ namespace Factura.Controllers
             //
             var resultInvoices = await _facturaContexto.Invoices.Include("DetailsNavigations").Include("DetailsNavigations.Product").Include("DetailsNavigations").Include("ClientNavigation").ToListAsync();
             var response_invoice = new List<ResponseInvoice>();
-            
+
             if (resultInvoices == null)
             {
                 return BadRequest();
@@ -47,11 +47,12 @@ namespace Factura.Controllers
                 itemInvoce.Date = invoice.Date;
 
                 itemInvoce.DetailInvoice = new List<DetailInvoiceDto>();
-                    foreach (var detInvoice in invoice.DetailsNavigations)
+                foreach (var detInvoice in invoice.DetailsNavigations)
                 {
                     var itemDt = new DetailInvoiceDto();
 
-                    itemDt.Product = new ProductDto {
+                    itemDt.Product = new ProductDto
+                    {
                         Id = detInvoice.Product.Id,
                         Name = detInvoice.Product.Name,
                         Price = detInvoice.Product.Price
@@ -61,9 +62,9 @@ namespace Factura.Controllers
                     itemDt.Id = detInvoice.Id;
                     itemDt.ProductId = detInvoice.ProductId;
                     itemInvoce.DetailInvoice.Add(itemDt);
-                    
+
                 }
-                    
+
 
 
 
@@ -134,24 +135,66 @@ namespace Factura.Controllers
             }
 
             return Ok(result);
-           
+
         }
 
         // PUT api/<InvoiceController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<IEnumerable<ResponseInvoice>>> Put(InvoiceFullDto invoiceFullDto )
+        public async Task<ActionResult<IEnumerable<ResponseInvoice>>> Put(InvoiceFullDto invoiceFullDto)
         {
             var result = new ResponseInvoice();
             try
             {
-                var rs_invoice =await _facturaContexto.Invoices.Where(x => x.Id == invoiceFullDto.Id && x.Date == invoiceFullDto.Date).FirstOrDefaultAsync();
+                using (var tran = _facturaContexto.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var rs_invoice = await _facturaContexto.Invoices.Where(x => x.Id == invoiceFullDto.Id).FirstOrDefaultAsync();
+
+                        if (rs_invoice == null)
+                        {
+                            return BadRequest();
+                        }
+                        rs_invoice.ClientId = invoiceFullDto.ClientId;
+                        rs_invoice.NameShopkeeper = invoiceFullDto.NameShopkeeper;
+                        rs_invoice.Date = rs_invoice.Date;
+
+                        _facturaContexto.Entry(rs_invoice).State = EntityState.Modified;
+                        _facturaContexto.SaveChanges();
+
+                        foreach (var item in invoiceFullDto.DetailInvoiceDto)
+                        {
+                            var detailp = _facturaContexto.DetailInvoices.Find(item.ProductId);
+                            var listProduct = new DetailInvoiceDto();
+                            if (detailp == null)
+                            {
+                                return BadRequest();
+                            }
+                            listProduct.ProductId = item.ProductId;
+                            listProduct.Precio_Pro = detailp.Precio_Pro;
+                            listProduct.Cantidad = item.Cantidad;
+                            listProduct.Total = detailp.Precio_Pro * item.Cantidad;
+
+                            _facturaContexto.Entry(listProduct).State = EntityState.Modified;
+                            _facturaContexto.SaveChanges();
+
+                        }
+
+
+                        await tran.CommitAsync();
+                    }
+                    catch (Exception)
+                    {
+                        await tran.RollbackAsync();
+                        throw;
+                    }
+                }
             }
             catch (Exception)
             {
 
                 throw;
             }
-
             return Ok(result);
 
 
