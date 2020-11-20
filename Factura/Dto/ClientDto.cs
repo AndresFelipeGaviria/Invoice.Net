@@ -11,6 +11,7 @@ namespace Factura.Dto
         public string Name { get; set; }
         public int Telephone { get; set; }
         public string Address { get; set; }
+        
 
     }
 }

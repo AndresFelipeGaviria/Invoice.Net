@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Factura.Migrations
 {
     [DbContext(typeof(FacturaContexto))]
-    [Migration("20201119002252_CreatingModels")]
-    partial class CreatingModels
+    [Migration("20201119185836_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
