@@ -13,7 +13,17 @@ namespace Factura.AutoMapperConfig
         public AutoMapping()
         {
             CreateMap<Client, ClientDto>().ReverseMap();
+            CreateMap<ClientDto, ClientResponseDto>().ReverseMap();
+            CreateMap<ClientDto, ClientRequestDto>().ReverseMap();
+
             CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<ProductDto, ProductRequestDto>().ReverseMap();
+            CreateMap<ProductDto, ProductResponseDto>().ReverseMap();
+
+            CreateMap<Invoice, InvoiceFullDto>().ReverseMap();
+            CreateMap<InvoiceFullDto, InvoiceResponseDto>().ReverseMap();
+            CreateMap<InvoiceFullDto, InvoiceResponseDto>().ReverseMap();
+
         }
         
     }

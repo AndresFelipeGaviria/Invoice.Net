@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Factura.Data;
+using Factura.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,8 @@ namespace Factura
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
             services.AddSwaggerGen();
             services.AddDbContext<FacturaContexto>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexionText")));
 
@@ -36,6 +39,11 @@ namespace Factura
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new ValidationFilter());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

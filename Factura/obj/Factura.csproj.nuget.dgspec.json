@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj": {}
+    "C:\\Users\\THINKPAD\\Source\\Repos\\Invoice.Net\\Factura\\Factura.csproj": {}
   },
   "projects": {
-    "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj": {
+    "C:\\Users\\THINKPAD\\Source\\Repos\\Invoice.Net\\Factura\\Factura.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj",
+        "projectUniqueName": "C:\\Users\\THINKPAD\\Source\\Repos\\Invoice.Net\\Factura\\Factura.csproj",
         "projectName": "Factura",
-        "projectPath": "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\Factura.csproj",
-        "packagesPath": "C:\\Users\\zoit1\\.nuget\\packages\\",
-        "outputPath": "D:\\Proyectos\\factura.net\\Invoice.Net\\Factura\\obj\\",
+        "projectPath": "C:\\Users\\THINKPAD\\Source\\Repos\\Invoice.Net\\Factura\\Factura.csproj",
+        "packagesPath": "C:\\Users\\THINKPAD\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\THINKPAD\\Source\\Repos\\Invoice.Net\\Factura\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\zoit1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\THINKPAD\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,6 +47,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[8.1.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[9.3.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.3.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -119,7 +127,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
